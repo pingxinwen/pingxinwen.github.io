@@ -7,10 +7,11 @@ module.exports = {
     output: {
         filename:'[name]-[contenthash:8].js',
         path: path.join(__dirname,'./dist'),
-        publicPath:  process.env.NODE_ENV === 'development'? '':'https://pingxinwen.github.io/homepage/',
+        publicPath:  process.env.NODE_ENV === 'development'? '/':'https://pingxinwen.github.io/homepage/',
     },
     devServer: {
         port: 2021,
+        open:['/homepage'],
         historyApiFallback: true
     },
     resolve: {
