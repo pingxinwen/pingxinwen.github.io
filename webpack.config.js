@@ -1,15 +1,13 @@
 const HTMLWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 
-const env = process.env.NODE_ENV;
-
 module.exports = {
-    mode: env === 'production'? 'production' :'development',
+    mode: process.env.NODE_ENV === 'production'? 'production' :'development',
     entry: './src/index.tsx',
     output: {
-        filename:'[name].js',
+        filename:'[name]-[contenthash:8].js',
         path: path.join(__dirname,'./dist'),
-        publicPath:  env === 'production'? '/homepage' :'/',
+        publicPath:  process.env.NODE_ENV === 'production'? 'https://pingxinwen.github.io/homepage/' :'/',
     },
     devServer: {
         port: 2021,
