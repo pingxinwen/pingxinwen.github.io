@@ -9,7 +9,7 @@ module.exports = {
     output: {
         filename:'[name].js',
         path: path.join(__dirname,'./dist'),
-        publicPath:  env === 'production'? '' :'/',
+        publicPath:  env === 'production'? '/homepage' :'/',
     },
     devServer: {
         port: 2021,
