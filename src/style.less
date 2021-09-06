@@ -1,0 +1,28 @@
+@backimg:'./static/img';
+
+body {
+  position: relative;
+}
+
+#root {
+  width: 100%;
+  font-size: large;
+  color: #333;
+  position: absolute;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.none-background {
+  background:none !important;
+}
+
+.image-background {
+  background-image: ~"url('./static/img/bg.jpg')";
+  background-position:center 75%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100vw;
+  height: 100vh;
+  z-index: -10;
+  position: fixed;
+}
