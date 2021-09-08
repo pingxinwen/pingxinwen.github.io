@@ -7,7 +7,7 @@ module.exports = {
     output: {
         filename:'[name]-[contenthash:8].js',
         path: path.join(__dirname,'./dist'),
-        publicPath:  process.env.NODE_ENV === 'development'? '/':'//blog.pingxinwen.top',
+        publicPath:  process.env.NODE_ENV === 'development'? '/':'//blog.pingxinwen.top/',
     },
     devServer: {
         port: 2021,
