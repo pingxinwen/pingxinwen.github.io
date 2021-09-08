@@ -13,7 +13,7 @@ export default (): JSX.Element => {
 
   return (
     <Fragment>
-      <Router basename="/homepage">
+      <Router>
         <MyHeader />
         <GlassContainer >
           {/* <p>hello</p>
