@@ -1,25 +1,48 @@
 .header{
   background-color: #6cf;
   width: 100%;
+  height: 64px;
   position: fixed;
   z-index: 300;
+  padding: 0 50px;
+  line-height: 32px;
+  display: flex;
+  align-items: center;
+
+  &-wrapper {
+    width: 100%;
+    height: 50%;
+    margin: auto;
+    display: flex;
+    justify-content: space-around;
+  }
+
   &-title {
     width: 200px;
-    justify-self: start;
+    height: 100%;
   }
+
   &-menu {
     width: fit-content;
     height: 100%;
     list-style-type: none;
     margin-bottom: 0;
 
-    li{
+    a {
       display: inline-block;
-      margin: auto 16px auto;
-      
-      a{
-        color: #333;
-      }
+      color: #333;
+      vertical-align: center;
+      display: inline-block;
+      margin: auto 12px;
+      padding: 0 8px;
+      height: 100%;
+      border-radius: 4px;
+      background: transparent;
+      transition: all 0.3s ease-in-out 0s;
+    }
+
+    a:hover {
+      background: #29b6f6;
     }
   }
 }

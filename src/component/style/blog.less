@@ -1,7 +1,14 @@
 .blog-content {
   color: #111;
+  line-height: 1.7;
+  font-size: 16px;
+
+  pre,code {
+    font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+  }
     
-  blockquote {
+  &-blockquote {
+    margin: 16px 0;
     padding:24px 16px 24px 48px;
     word-spacing: 1px;
     border-left: 5px solid #f6b73c ;
@@ -14,40 +21,41 @@
     }
   }
   
-  h1 {
+  &-h1 {
     font-size: 36px;
     font-weight: bolder;
   }
 
-  h2 {
+  &-h2 {
     font-size: 28px;
     font-weight: bolder;
   }
 
-  h3 {
+  &-h3 {
     font-size: 24px;
     font-weight: bolder;
   }
 
-  h4 {
+  &-h4 {
     font-size: 20px;
     font-weight: bolder;
   }
 
-  p {
+  &-p {
     font-size: 18px;
-
-    code {
-      margin-left: 8px;
-      margin-right: 8px;
-      font-style: italic;
-      background-color: #ccc;
-    }
   }
 
-  pre {
+  &-inlinecode {
+    margin-left: 8px;
+    margin-right: 8px;
+    font-style: italic;
+    background-color: #ccc;
+  }
+
+  &-pre {
     background-color: rgba(102, 204, 255, 0.4);
     border-radius: 24px;
+    overflow-x: auto;
     
     code {
       display: block;

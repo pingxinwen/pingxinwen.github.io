@@ -1,4 +1,3 @@
-import 'antd/dist/antd.css';
 import './style.less';
 
 import React, { Fragment } from 'react';
