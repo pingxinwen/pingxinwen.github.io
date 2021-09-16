@@ -5,8 +5,8 @@
   "main": "index.js",
   "private": true,
   "scripts": {
-    "start": "set NODE_ENV=development&& webpack server --config webpack.config.js",
-    "build": "webpack --config webpack.config.js"
+    "start": "webpack server --config ./build/webpack.dev.js",
+    "build": "webpack --config ./build/webpack.build.js"
   },
   "repository": {
     "type": "git",
@@ -47,7 +47,8 @@
     "typescript": "^4.4.2",
     "webpack": "^5.51.1",
     "webpack-cli": "^4.8.0",
-    "webpack-dev-server": "^4.0.0"
+    "webpack-dev-server": "^4.0.0",
+    "webpack-merge": "^5.8.0"
   },
   "browserslist": [
     "last 2 versions",

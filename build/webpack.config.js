@@ -2,21 +2,15 @@ const HTMLWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 
 module.exports = {
-    mode: process.env.NODE_ENV === 'development'? 'development' :'production',
     entry: './src/index.tsx',
     output: {
         filename:'[name]-[contenthash:8].js',
-        path: path.join(__dirname,'./dist'),
-        publicPath:  process.env.NODE_ENV === 'development'? '/':'//blog.pingxinwen.top/',
-    },
-    devServer: {
-        port: 2021,
-        historyApiFallback: true
+        path: path.join(__dirname,'../','./dist'),
     },
     resolve: {
         extensions: ['.js', '.jsx','.ts','.tsx'],
         alias:{
-            '#':path.join(__dirname,'docs')
+            '#':path.join(__dirname,'..','docs')
         },
         fallback: {
             fs:false
