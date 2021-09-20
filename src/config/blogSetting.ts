@@ -1,11 +1,6 @@
-// import mdx file here
-
-import Hello from '#/hello.mdx';
-import UseWebpack1 from '#/use-webpack-1.mdx';
-import SummaryTransport from '#/summary-computer-network-transport.mdx';
+import { lazy } from 'react';
 
 type MDXComponent = (props: any) => JSX.Element;
-
 
 /**
  * 包含单个mdx文件及其信息
@@ -32,19 +27,19 @@ export interface BlogSet {
 
 export const blogFiles: Array<BlogSet> = [
   {
-    componet: Hello,
+    componet: lazy(() => import('#/hello.mdx')),
     name: 'hello',
     title: '测试文本',
     tags: []
   },
   {
-    componet: UseWebpack1,
+    componet: lazy(() => import('#/use-webpack-1.mdx')),
     name: 'how-to-use-webpack-1',
     title: 'Webpack学习总结1 - 如何使用webpack打包/启动devServe',
     tags: ['Webpack', 'Project']
   },
   {
-    componet: SummaryTransport,
+    componet: lazy(() => import('#/summary-computer-network-transport.mdx')),
     name: 'summary-computer-network-transport',
     title: '计算机网络知识总结(1) - 传输层',
     tags: ['C', '计算机网络']
@@ -63,11 +58,9 @@ export const tagColors: Map<string, string> = new Map([
     'Project', '#78909c'
   ],
   [
-    'C','#ffd600'
+    'C', '#ffd600'
   ],
   [
-    '计算机网络','#03a9f4'
+    '计算机网络', '#03a9f4'
   ]
-])
-
-
+]);

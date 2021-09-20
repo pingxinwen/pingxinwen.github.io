@@ -4,7 +4,6 @@ import React, { Fragment } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { MyHeader } from './component/header';
 import GlassContainer from './component/glass-container';
-import './component/style/index';
 import MyRoutes from './config/router';
 
 

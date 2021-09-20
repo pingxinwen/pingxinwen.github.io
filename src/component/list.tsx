@@ -14,16 +14,16 @@ export default function List(props: IListProps) {
     <div className="list">
       {
         data.map(value=>(
-          <div className="list-item">
+          <div className="list-item" key={value.name}>
             <div className="list-item-title">
-              <Link to={`/blog/${value.name}`}>{value.title}</Link>
+              <Link to={`/article/${value.name}`}>{value.title}</Link>
             </div>
             <div className="list-item-tag">
               {
                 value.tags.sort().map(tag =>{
                   const color = tagColor.get(tag);
                   return (
-                    <Tag color={color}>{tag}</Tag>
+                    <Tag color={color} key={tag}>{tag}</Tag>
                   )
                 })
               }

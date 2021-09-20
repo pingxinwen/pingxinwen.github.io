@@ -2,7 +2,7 @@
     "compilerOptions": {
         "allowSyntheticDefaultImports": true,
         "removeComments": true,
-        "module": "ES6",
+        "module": "ESNext",
         "moduleResolution": "Node",
         "noImplicitAny": true,
         "jsx": "react",

@@ -1,0 +1,48 @@
+@progess-color: '#66ccff';
+
+.loading {
+  &-wrapper {
+    position: fixed;
+    display: flex;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 100;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(225, 225, 225, 0.5);
+  }
+
+  &-center {
+    width: 72px;
+    height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+  }
+
+  &-progress {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border-right: 4px solid #66ccff;
+    border-top: 3px solid #66ccff;
+    animation-name: loading-rotate;
+    animation-timing-function:linear;
+    animation-duration: 0.77s;
+    animation-play-state: running;
+    animation-iteration-count: infinite;
+  }
+}
+
+@keyframes loading-rotate {
+  from {
+    transform: rotate(0);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
