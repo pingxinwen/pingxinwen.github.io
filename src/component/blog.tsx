@@ -34,7 +34,7 @@ const MDXComponents: Components = {
   h5:H5,
   h6:H6,
   p: (props) => <p className={getClassName('p')} >{props.children}</p>,
-  a: (props) => <a className={getClassName('a')} >{props.children}</a>,
+  a: (props) => <a {...props} className={getClassName('a')} >{props.children}</a>,
   blockquote:(props) => <blockquote className={getClassName('blockquote')} >{props.children}</blockquote>,
   pre:(props) => <pre className={getClassName('pre')} >{props.children}</pre>,
   code:(props) => <code className={getClassName('code')} >{props.children}</code>,

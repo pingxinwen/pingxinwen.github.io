@@ -9,7 +9,7 @@ module.exports = {
     chunkFilename: 'js/app-[contenthash:8].js'
   },
   resolve: {
-    extensions: ['.js', '.jsx','.ts','.tsx'],
+    extensions: ['.js', '.jsx','.ts','.tsx','.mdx'],
     alias:{
       '#':path.join(__dirname,'..','docs')
     },
@@ -64,5 +64,12 @@ module.exports = {
         use: ['style-loader','css-loader','less-loader']
       }
     ]
+  },
+  optimization: {
+    runtimeChunk: 'single',
+    splitChunks: {
+      chunks:'all',
+      minSize:0
+    }
   }
 }

@@ -1,5 +1,4 @@
 import { lazy } from 'react';
-
 type MDXComponent = (props: any) => JSX.Element;
 
 /**
@@ -27,22 +26,28 @@ export interface BlogSet {
 
 export const blogFiles: Array<BlogSet> = [
   {
-    componet: lazy(() => import('#/hello.mdx')),
+    componet: lazy(() => import('#/hello/index.mdx')),
     name: 'hello',
     title: '测试文本',
     tags: []
   },
   {
-    componet: lazy(() => import('#/use-webpack-1.mdx')),
+    componet: lazy(() => import('#/use-webpack-1/index.mdx')),
     name: 'how-to-use-webpack-1',
     title: 'Webpack学习总结1 - 如何使用webpack打包/启动devServe',
     tags: ['Webpack', 'Project']
   },
   {
-    componet: lazy(() => import('#/summary-computer-network-transport.mdx')),
+    componet: lazy(() => import('#/summary-computer-network-transport/index.mdx')),
     name: 'summary-computer-network-transport',
     title: '计算机网络知识总结(1) - 传输层',
     tags: ['C', '计算机网络']
+  },
+  {
+    componet: lazy(() => import('#/use-hook-in-react/index.mdx')),
+    name: 'use-hook-in-react',
+    title: '在React中巧妙使用Hook',
+    tags: ['React'],
   }
 ];
 
@@ -62,5 +67,8 @@ export const tagColors: Map<string, string> = new Map([
   ],
   [
     '计算机网络', '#03a9f4'
+  ],
+  [
+    'React', '#61dafb'
   ]
 ]);
