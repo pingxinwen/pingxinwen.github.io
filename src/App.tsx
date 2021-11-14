@@ -3,7 +3,6 @@ import './style.less';
 import React, { Fragment } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { MyHeader } from './component/header';
-import GlassContainer from './component/glass-container';
 import MyRoutes from './config/router';
 
 
@@ -13,7 +12,7 @@ export default (): JSX.Element => {
     <Fragment>
       <Router>
         <MyHeader />
-        <GlassContainer >
+        <main className="container-glass">
           {/* <p>hello</p>
           <div style={{
           height:1000,
@@ -22,7 +21,7 @@ export default (): JSX.Element => {
           backgroundPosition:'cover'
         }}></div> */}
           <MyRoutes />
-        </GlassContainer>
+        </main>
       </Router>
     </Fragment>
   )

@@ -7,12 +7,12 @@ const removeTag = (arg:{className:string}):object =>{
 }
 
 interface CodeBlockProps {
-  className: string;
+  className?: string;
 }
 
 const CodeBlock: FC<CodeBlockProps> = (props) => {
   const { className, children } = props;
-  const language = className.replace(/language-/, '') as Language;
+  const language = className?.replace(/language-/, '') as Language;
 
   return (
     <Highlight {...defaultProps} code={children.toString().trim()} language={language} theme={vsDark}>

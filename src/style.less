@@ -1,8 +1,6 @@
 @import './component/style/index.less';
 @import './view/index.less';
 
-@backimg:'./static/img';
-
 * {
   box-sizing: border-box;
 }
@@ -19,6 +17,7 @@ a {
 
 #root {
   width: 100%;
+  min-height: 100vh;
   font-size: large;
   color: #333;
   position: absolute;
@@ -30,7 +29,8 @@ a {
 }
 
 .image-background {
-  background-image: ~"url('./static/img/bg.jpg')";
+  background-color: rgba(1, 151, 156, 0.637);
+  background-image: ~"url('./static/img/93981003_p0.webp')";
   background-position:center 75%;
   background-repeat: no-repeat;
   background-size: cover;
@@ -38,4 +38,15 @@ a {
   height: 100vh;
   z-index: -10;
   position: fixed;
+}
+
+.container-glass {
+  background-color:rgba(238,238,238,0.6);;
+  width: 70%;
+  margin: 128px auto 64px;
+  padding: 32px calc(min(72px,7%));
+  border-radius: 14px;
+  min-height: calc(100vh - 200px);
+  border: 1px solid #ccc;
+  box-shadow: 0px 4px 2px 2px rgba(238, 238, 238, 0.3);
 }

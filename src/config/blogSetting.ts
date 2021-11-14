@@ -34,7 +34,7 @@ export const blogFiles: Array<BlogSet> = [
   {
     componet: lazy(() => import('#/use-webpack-1/index.mdx')),
     name: 'how-to-use-webpack-1',
-    title: 'Webpack学习总结1 - 如何使用webpack打包/启动devServe',
+    title: 'Webpack学习总结1 - 如何使用webpack打包/启动devServer',
     tags: ['Webpack', 'Project']
   },
   {
@@ -49,7 +49,7 @@ export const blogFiles: Array<BlogSet> = [
     title: '在React中巧妙使用Hook',
     tags: ['React'],
   }
-];
+].reverse();
 
 
 export const tagColors: Map<string, string> = new Map([
