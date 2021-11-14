@@ -1,8 +1,10 @@
 import React from 'react';
 import { Components, MDXProvider } from '@mdx-js/react';
 
+import CodeBlock from './code';
+
 interface BlogProps {
-  children: React.ReactNode
+  children: React.ReactNode;
 };
 
 const getClassName = (name:string)=> `blog-content-${name}`;
@@ -37,8 +39,9 @@ const MDXComponents: Components = {
   a: (props) => <a {...props} className={getClassName('a')} >{props.children}</a>,
   blockquote:(props) => <blockquote className={getClassName('blockquote')} >{props.children}</blockquote>,
   pre:(props) => <pre className={getClassName('pre')} >{props.children}</pre>,
-  code:(props) => <code className={getClassName('code')} >{props.children}</code>,
+  code: CodeBlock as MDXComponent,
   inlineCode: (props) => <code className={getClassName('inlinecode')} >{props.children}</code>,
+  ol:(props) => <ol {...props} className={getClassName('ol')}>{props.children}</ol>
 }
 
 export default function Blog(props: BlogProps) {

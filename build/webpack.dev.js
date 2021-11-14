@@ -8,6 +8,7 @@ module.exports = merge(baseconfig,{
   },
   devServer: {
     port:2021,
+    open:true,
     historyApiFallback:true,
     // for use in gitpod
     allowedHosts: 'all'
