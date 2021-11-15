@@ -1,4 +1,5 @@
 import './style.less';
+import '@icon-park/react/styles/index.css';
 
 import React, { Fragment } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';

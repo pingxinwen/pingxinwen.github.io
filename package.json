@@ -21,6 +21,7 @@
     "url": "https://github.com/pingxinwen/homepage/issues"
   },
   "dependencies": {
+    "@icon-park/react": "^1.3.5",
     "@mdx-js/react": "^1.6.22",
     "prism-react-renderer": "^1.2.1",
     "react": "^16.14.0",
