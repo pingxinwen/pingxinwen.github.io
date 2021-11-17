@@ -4,7 +4,7 @@ import { ExpandLeft, ExpandRight } from '@icon-park/react';
 
 export function MyHeader(): JSX.Element {
   const [expand, setExpand] = useState(false);
-  const [show, setShow] = useState(true);
+  const [show, setShow] = useState(false);
   const headerRef = useRef<HTMLHeadElement>();
   const location = useLocation();
 
