@@ -91,6 +91,32 @@ useCallback 是一个用来包装函数的 hook，它可以根据每次渲染时
 这里我们设置了空数组，也就是说 callback 在组件挂载时就已经确定了，之后再次渲染也不会更新，这样内部的 number 值永远都是 0 ，它只会
 给 state 设置 1。因此我们的组件不会再更新了。
 
-其次，我们的组件函数执行了两次，因为 console.log 执行了两边，按理来说，第一次执行时 state 已经是 1 了，第二次触发后应该不触发重新渲染，
-事实上也是这样的：第二次 random 值发生了变化，打印在了 console，但没有被渲染。
+其次，我们的组件函数执行了两次，因为 console.log 执行了两遍，按理来说，第一次执行时 state 已经是 1 了，第二次触发后应该不触发重新渲染，
+事实上也是这样的：第二次 random 值发生了变化，打印在了 console，但没有被渲染。这就需要我们将 number 添加在依赖数组里，这样每次重新渲染
+触发 number 更新时，`onClickCallback` 这个函数会被重新生成一次，callback 里拿到的就是最新的 number 了。
 
+`useCallback` 主要解决了依赖问题：组件函数内部定义的函数会在每次组件函数执行时重新生成一次，如果其依赖没有变动，就会成为一次无用的更新。
+这个 hook 可以处理依赖，仅在每次依赖更新时才会重新生成函数，这样就保证函数依赖的变量永远是最新的，起到一种记忆的效果。
+
+以此类推，React 不仅可以帮助我们“记忆”函数，也可以记录一个变量。`useMemo` 就是这样一个 hook，和 `useCallback` 类似的，它接受两个参数，
+第一个是 factory 函数，用来处理值，第二个是依赖数组。比如可以这样使用：
+
+```ts
+const feedback = useMemo(()=>{
+  if(score > 90){
+    return 'Congratulation'
+  } else if(score > 60) {
+    return 'Not bad'
+  } else {
+    return 'Attention'
+  }
+},[score])
+```
+
+这个 feedback 的值，只会在 score 变化时才会变化，并且只有在变化时参数函数才会被运行。
+
+那么是不是有必要将所有值都用 `useCallback`、`useMemo` 记录起来？对于一些简单的场景，没必要使用这两个 hook，可能反倒引起不必要的性能牺牲，
+例如前面的 callback 例子，我们的组件仅有一个 state，每次更新实际上都会导致 `useCallback` 重新生成 callback，这就没必要使用 hook 了。
+也可以阅读 Kent C. Dodds 的博客 [When to useMemo and useCallback](https://kentcdodds.com/blog/usememo-and-usecallback) 详细了解。
+
+(待更新)

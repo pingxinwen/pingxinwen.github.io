@@ -19,6 +19,13 @@ export function MyHeader(): JSX.Element {
     };
     changeExpand();
     window.addEventListener('resize', changeExpand);
+
+    setTimeout(()=>{
+      const wrapper = headerRef.current.children[0];
+      if(wrapper) {
+        wrapper.setAttribute('style','transition: transform 0.2s')
+      }
+    },0)
     return () => {
       window.removeEventListener('resize', changeExpand);
     }
