@@ -1,0 +1,122 @@
+.header{
+  background-color: #6cf;
+  width: 100%;
+  height: 64px;
+  position: fixed;
+  z-index: 300;
+  padding: 0 50px;
+  line-height: 32px;
+  display: flex;
+  align-items: center;
+
+  &-wrapper {
+    position: relative;
+    width: 100%;
+    height: 50%;
+    margin: auto;
+    display: flex;
+    justify-content: space-around;
+  }
+
+  &-control {
+    display: none;
+  }
+
+  &-title {
+    width: 200px;
+    height: 100%;
+  }
+
+  &-menu {
+    width: fit-content;
+    height: 100%;
+    margin-bottom: 0;
+  }
+
+  a {
+    display: inline-block;
+    color: #333;
+    vertical-align: center;
+    cursor: pointer;
+    display: inline-block;
+    margin: auto 12px;
+    padding: 0 8px;
+    height: 100%;
+    border-radius: 4px;
+    background: transparent;
+    transition: all 0.3s ease-in-out 0s;
+  }
+
+  a:hover {
+    background: #29b6f6;
+  }
+}
+
+@media screen and (max-width:720px) {
+  .header {
+    height: 100vh;
+    width: 100%;
+    display: block;
+    padding: 0;
+    background: rgba(48, 48, 48, 0.7);
+    transition: background-color 0.2s;
+    &-wrapper {
+      position: relative;
+      height: 100%;
+      width: fit-content;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      padding-left: 14px;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: start;
+      background: #6cf;
+      border-right: 1px solid #ebebeb;
+    }
+    &-title,
+    &-menu {
+      height: auto;
+      margin-bottom: 22px;
+    }
+
+    &-menu {
+      display: flex;
+      flex-direction: column;
+    }
+
+    a {
+      font-size: 22px;
+      margin-top: 12px;
+      margin-bottom: 22px;
+    }
+
+    &-control {
+      display:block;
+      position: absolute;
+      color: #333;
+      right: -34px;
+      bottom: 12px;
+      width: 34px;
+      height: 34px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #6cf;
+      border: 1px solid #ebebeb;
+      border-left: none;
+      border-radius: 0 4px 4px 0;
+    }
+  }
+}
+
+.header-collapse {
+  background: none;
+  width: 0;
+  .header {
+    &-wrapper {
+      transform: translateX(-100%);
+    }
+  }
+}

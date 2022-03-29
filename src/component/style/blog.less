@@ -1,0 +1,110 @@
+.blog-content {
+  color: #111;
+  line-height: 1.7;
+  font-size: 16px;
+    
+  &-blockquote {
+    margin: 16px 0;
+    padding:24px 16px 24px 48px;
+    word-spacing: 1px;
+    border-left: 5px solid #f6b73c ;
+    background-color: #fff3d4;
+    line-height: 2;
+
+    p {
+      margin: 14px auto;
+      display: block;
+    }
+  }
+  
+  &-h1 {
+    font-size: 36px;
+    font-weight: bolder;
+  }
+
+  &-h2 {
+    font-size: 28px;
+    font-weight: bolder;
+  }
+
+  &-h3 {
+    font-size: 24px;
+    font-weight: bolder;
+  }
+
+  &-h4 {
+    font-size: 20px;
+    font-weight: bolder;
+  }
+
+  &-p {
+    font-size: 18px;
+  }
+
+  &-ol {
+    padding-left: 14px;
+  }
+
+  &-codepre,
+  &-inlinecode {
+    font-family: Consolas, 'Source Code Pro', monospace;
+  }
+
+  &-codepre {
+    overflow: auto;
+    position: relative;
+  }
+
+  &-codepre:hover .copy {
+    visibility:visible;
+  }
+
+  &-inlinecode {
+    border-radius: 4px;
+    padding: 0 4px;
+    font-style: italic;
+    background-color: rgba(102, 204, 255, 0.5);
+  }
+
+  &-pre {
+    background-color: rgba(102, 204, 255, 0.4);
+    border-radius: 24px;
+    overflow-x: auto;
+    
+    code {
+      display: block;
+      padding: 16px;
+    }
+  }
+}
+
+.copy {
+  position: absolute;
+  right: 16px;
+  top:16px;
+  visibility: hidden;
+  &-btn {
+    border-radius: 4px;
+    background-color: #fff;
+    border: 1px solid #66ccff;
+    cursor: pointer;
+    padding: 4px 8px;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  &-btn:hover,
+  &-btn:focus {
+    background-color: #dcf3ff;
+  }
+}
+
+@media screen and (max-width:720px) {
+  .blog-content {
+    &-blockquote {
+      padding:16px 16px 16px 12px;
+      line-height: 1.5;
+      border-left-width: 2px;
+      margin-right: 2px;
+    }
+  }
+}

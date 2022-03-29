@@ -1,0 +1,63 @@
+@import './component/style/index.less';
+@import './view/index.less';
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+
+a {
+  text-decoration: none;
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+  font-size: large;
+  color: #333;
+  position: absolute;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.none-background {
+  background:none !important;
+}
+
+.image-background {
+  background-color: rgba(1, 151, 156, 0.637);
+  background-image: ~"url('./static/img/93981003_p0.webp')";
+  background-position:center 75%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100vw;
+  height: 100vh;
+  z-index: -10;
+  position: fixed;
+}
+
+.container-glass {
+  background-color:rgba(238,238,238,0.6);;
+  width: 70%;
+  margin: 128px auto 64px;
+  padding: 32px calc(min(72px,7%));
+  border-radius: 14px;
+  min-height: calc(100vh - 200px);
+  border: 1px solid #ccc;
+  box-shadow: 0px 4px 2px 2px rgba(238, 238, 238, 0.3);
+}
+
+@media screen and (max-width:720px) {
+  #root {
+    font-size: medium;
+  }
+  .container-glass {
+    width: 90%;
+    margin: 64px auto;
+    padding: 8px 16px;
+  }
+}

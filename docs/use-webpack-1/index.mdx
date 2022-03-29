@@ -1,0 +1,98 @@
+# Webpack学习总结1 - 如何使用webpack打包/启动devServe
+
+今天在作业中使用了webpack来打包前端项目，学习了如何使用webpack进行打包项目、运行dev serve。这里总结一下自己的学习成果。
+
+> 本文章使用的代码可见github：[项目地址](https://github.com/pingxinwen/myHomework/tree/master/%E5%89%8D%E7%AB%AF%E4%BD%9C%E4%B8%9A/work5)
+
+## 创建前端项目
+
+首先需要安装Node.js和npm（废话），然后创建`package.json`，可以使用`npm init`来创建文件，npm会询问项目的设置，当然你也可以仿照使用vue-cli等脚手架的package.json文件自己手写一个package。然后我们需要安装以下依赖：`webpack`、`webpack-cli`、`webpack-dev-server`
+
+## 设置npm script
+
+之前写过Vue、React项目，启动项目都是`npm run start`，这里是让npm执行写在package.json文件里设置好的命令，npm自身是不包含`start`的内容的，因此需要在文件里去写命令。
+
+```json
+{
+  //...
+  "scripts": {
+    "dev": "webpack server --config webpack.config.js",
+    "build": "webpack  --config webpack.config.js"
+  }
+  //...
+}
+```
+
+我们这里使用了5.0以上的webpack，使用webpack server的命令与之前不同了，网上还有很多基于以前版本的教程，最好还是去看官网文档。
+
+这里编写了两个命令：一个是dev，用来开发时运行本地服务，预览自己的修改，一个是打包成文件，然后部署在专用的服务器上。两个命令都提供了相同的参数`--config webpack.config.js`，表示打包的配置文件为webpack.config.js，使用webpack的重点就是去编写webpack.config.js文件。
+
+## 编写webpack配置
+
+webpack主要有四大概念：入口、出口、loader、插件。入口`entry`是打包的起点，webpack会解析这个文件，如果这个文件有依赖则会把它们加载进来。从入口开始webpack会绘制依赖关系图，最终把需要的文件全部联系在一起。而出口`output`则是打包的结果，webpack会把整个项目重新编译，构建成一个js文件（当然也可以设置让他输出多个文件）。而loader和插件则是扩展了webpack的解析功能，webpack自身只能解析js和json，提供loader和插件可以让它解析更多文件，实现更多功能。
+
+这里采用的项目主要是三个文件：calc.html，calc.css，calc.js，放在项目的src目录下。之前是按静态文件的思路，在html文件里去引用css和js（link和script标签），这里需要用webpack打包文件，可以将js文件作为我们的入口去打包所有引用的文件。例如之前使用Vue，main.js就是打包的入口。由此可以设计webpack.config.sj文件。
+
+```js
+const path = require('path');  //Node模块
+
+module.exports = {
+    mode: "production",
+    entry: './src/calc.js',
+    output:{
+        path:path.resolve(__dirname,'dist'),
+        filename:"bundle.js",
+    },
+    devServer: {
+        host: "127.0.0.1",
+        port: "8081",
+    }
+  //...
+}
+```
+
+这里可以看到打包的入口是./src/calc.js，然后output会在dist目录下，输出文件为bundle.js。如果只希望打包js文件，那么完全可以把html引用的js换成bundle.js即可。但是我们的目标是尽可能的打成一个文件，或者说只有两个文件：index.html和bundle.js。此外我们设置了devServer为127.0.0.1:8081，但是启动之后打开网址，并没有html而是显示项目目录，这说明webpack并没有按期望去解析calc.html。我们需要安装html插件：
+
+```shell
+npm install html-webpack-plugin
+```
+
+package.json就会出现这个依赖。再修改webpack配置：
+
+```js
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');  //引用插件
+
+module.exports = {
+    mode: "production",
+    entry: './src/calc.js',
+    output:{
+        path:path.resolve(__dirname,'dist'),
+        filename:"bundle.js",
+    },
+    devServer: {
+        host: "127.0.0.1",
+        port: "8081",
+    },
+    plugins:[
+        new HtmlWebpackPlugin ({
+            template:'src/calc.html',  //模版html
+            filename:"index.html"      //打包后输出的html
+        })
+    ],
+    module:{
+        rules:[
+            {
+                test:/\.css$/,  //这里是添加了对CSS文件的解析，使用正则表达式检验文件类型
+                use:[
+                    'style-loader','css-loader'  //表示对.css文件使用这两个loader去解析
+                ]
+            }
+        ]
+    }
+}
+```
+
+执行`npm run build`命令后，dist目录就会出现两个文件:`index.html`和`bundle.js`。如法炮制，我们可以添加对CSS文件的依赖，先用npm安装'style-loader'，'css-loader'，再添加modlue属性。不过这里需要注意的是，如果我们希望css文件打包在一起，应该在js文件中import要使用的css文件，而不是在模版html中link进去。最后打包的`index.html`中，head里会有对应文件的style标签内容。
+
+由此结合之前写过的Vue、React项目，就不难理解如何利用webpack打包了。
