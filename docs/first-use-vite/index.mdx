@@ -1,0 +1,87 @@
+# Vite 初体验踩坑 - 记录博客网站升级 + 迁移问题
+
+我的博客网站最开始是使用 webpack 进行打包的，因为想要自学 webpack 配置就没去用 create-react-app，而是自己从零开始搭webpack。
+结果是时间久了，不知道是新版webpack的问题还是其他配置的问题，启动越来越慢，甚至用公司的新电脑后，每次启动 server 直接卡死。
+正好同事推荐学习一下 vite，于是决定改用 vite 来体验一下，结果没想到居然还有几个库也需要升级，适应 breaking-change
+
+## 建立 React 项目
+
+因为原来的项目就是用 React 写的，因此不需要改变原来的代码，只提供一个打包环境即可，这部分按照[官网说明](https://vitejs.dev/guide/#scaffolding-your-first-vite-project)即可。
+
+需要注意的是, vite 的目录结构和原来 webpack 的并不一致，需要调整 index.html的位置。
+
+到此还觉得没什么问题，结果没想到的是麻烦还在后面。
+
+## 升级 mdx-js
+
+博客的文档文件都是 mdx 文件，通过 [mdx-js/react](https://mdxjs.com/) 这个库编译成 React 组件来使用，这大概是前端最常见的 mdx 工具库。
+然而，这个库不久前上线了新版本，提升了编译性能（对我来说并不关注，毕竟是本地编译而不是线上编译），
+支持了 vite 等 esbuild 工具，因此使用新版本理所应当了。
+
+首先安装 `@mdx-js/react` 和 `@mdx-js/rollup`，分别是 react 组件和 rollup plugin。vite 的打包工具还是 rollup，所以支持大部分的 rollup plugin。
+按照官方说明加入到 vite.config.ts 文件的 plugins 中，启动，然后直接报错。
+
+> failed to load config from my-blog/vite.config.ts  
+error when starting dev server:  
+Error [ERR_REQUIRE_ESM]: require() of ES Module my-blog/node_modules/@mdx-js/rollup/index.js from my-blog/vite.config.ts not supported.  
+Instead change the require of index.js in my-blog/vite.config.ts to a dynamic import() which is available in all CommonJS modules.  
+
+简单地表述报错信息，就是说在 vite.config.ts 文件中去 require() 获取一个 ES 模块是不支持的。查看 @mdx-js/rollup/index.js 这个文件，
+可以发现这是一个 ES Module，而不是通常 node 直接运行的 CommonJS 。事实上 Node 已经很早之前就开始支持直接运行 ES Module。需要在 package.json 中添加配置：
+
+```json
+{
+  "type": "module"
+}
+```
+
+这样就可以运行了。此外，由于我的项目中 mdx 文件不在 src 目录下，还需要额外指定文件路径：
+
+```ts
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+import mdx from '@mdx-js/rollup'
+
+// https://vitejs.dev/config/
+export default defineConfig({
+  plugins: [
+    react(),
+    mdx({
+      include: './docs/*/*.mdx', // 指定文件路径
+      providerImportSource: '@mdx-js/react' // provider的提供者
+    }),
+  ],
+  resolve: {
+    alias: {
+      "react/jsx-runtime": "react/jsx-runtime.js" // 解决 vite 使用 react 的引用问题 
+    }
+  }
+})
+```
+
+这样 mdx-js 2.0版本可以正常工作了。需要注意的是，新版本删除了 `inlineCode` 这个 MDXComponent，
+即单个反引号包裹的内容也会被认为是 code 元素。因此对此需要在 `code` 的组件里去分辨是三个反引号包裹的代码块还是代码行。
+
+## 升级 React-Router-Dom
+
+react的路由库 [react-router-dom](https://reactrouter.com/docs/en/v6/getting-started/overview) 也升级到了 v6, 组件的使用方式也发生了变化。
+可以参照[官方说明](https://reactrouter.com/docs/en/v6/upgrading/v5)从 v5 升级而来。
+
+个人比较感兴趣的是 `useRoutes` 这个新api，他可以以类似 vue-router 的方式，将路由表写成对象而不是 jsx 。
+这个 hook 返回的是 React Element，因此可以直接在jsx中使用。相比以往 Route 套 Route，这种方式可能更精简一些。
+
+## 部署到 netlify
+
+[Netlify](https://www.netlify.com/) 是一个网站部署服务，类似 Github Page，它可以将仓库代码拉过来编译部署，相对于 Github Page，它的功能更多一些，
+例如可以自由编写 Rewrites 和 Redirects， 对于 SPA 项目来说更友好一些。
+
+在根项目下添加 netlify.toml 文件，然后添加内容：
+
+```bash
+[[redirects]]
+  from = "/*"
+  to = "index.html"
+  status = 200
+```
+
+这样所有的路径请求都会指向index.html，对于 SPA 项目就可以避免直接访问路径产生404的问题。

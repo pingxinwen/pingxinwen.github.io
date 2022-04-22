@@ -1,4 +1,4 @@
-import { FC, Suspense, lazy } from "react";
+import { FC, Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
 
 import Home from "../view/home";
@@ -18,11 +18,6 @@ const MyRoutes: FC = () => (
         </Suspense>
       }
     />
-    <Route path="/test" element={
-      <Suspense fallback="hello">
-        {lazy( async () => ( await import('../component/test')) )}
-      </Suspense>
-    }></Route>
   </Routes>
 );
 export default MyRoutes;

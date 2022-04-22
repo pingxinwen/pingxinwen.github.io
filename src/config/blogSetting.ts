@@ -48,6 +48,11 @@ export const blogFiles: Array<BlogSet> = [
     name: 'use-hook-in-react',
     title: '在React中巧妙使用Hook',
     tags: ['React'],
+  }, {
+    component: lazy(() => import('../../docs/first-use-vite/index.mdx')),
+    name: 'first-use-vite',
+    title: 'Vite 初体验踩坑 - 记录博客网站升级 + 迁移问题',
+    tags: ['React', 'Project']
   }
 ].reverse();
 
