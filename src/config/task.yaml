@@ -16,3 +16,9 @@
   date: 2021-12-02
   tags: 
     - React
+
+- name: first-use-vite
+  title: Vite 初体验踩坑 - 记录博客网站升级 + 迁移问题
+  date: 2022-04-22
+  tags: 
+    - React
