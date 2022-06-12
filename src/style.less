@@ -16,11 +16,10 @@ a {
 }
 
 #root {
-  width: 100%;
-  min-height: 100vh;
+  padding-left: calc(100vw - 100%);
   font-size: large;
   color: #333;
-  position: absolute;
+  position: relative;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
@@ -28,12 +27,18 @@ a {
   background:none !important;
 }
 
+.main {
+  padding-top: 98px;
+  display: grid;
+  place-items: center;
+}
+
 .image-background {
-  background-color: rgba(1, 151, 156, 0.637);
-  background-image: ~"url('./static/img/93981003_p0.webp')";
-  background-position:center 75%;
-  background-repeat: no-repeat;
-  background-size: cover;
+  // background-color: rgba(1, 151, 156, 0.637);
+  background-image: url('./static/img/gaming-pattern.png');
+  // background-position:center 75%;
+  background-repeat: repeat;
+  // background-size: cover;
   width: 100vw;
   height: 100vh;
   z-index: -10;
@@ -41,9 +46,8 @@ a {
 }
 
 .container-glass {
-  background-color:rgba(238,238,238,0.6);;
+  background-color:rgba(244,244,244,0.1);;
   width: 70%;
-  margin: 128px auto 64px;
   padding: 32px calc(min(72px,7%));
   border-radius: 14px;
   min-height: calc(100vh - 200px);

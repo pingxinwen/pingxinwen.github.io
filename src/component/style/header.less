@@ -1,9 +1,9 @@
 .header{
   background-color: #6cf;
-  width: 100%;
+  width: 100vw;
+  position: absolute;
   height: 64px;
-  position: fixed;
-  z-index: 300;
+  margin-left: calc(100% - 100vw);
   padding: 0 50px;
   line-height: 32px;
   display: flex;
@@ -11,7 +11,7 @@
 
   &-wrapper {
     position: relative;
-    width: 100%;
+    width: 70vw;
     height: 50%;
     margin: auto;
     display: flex;
