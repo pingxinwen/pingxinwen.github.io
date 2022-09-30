@@ -41,7 +41,8 @@ export default function App() {
       <button onClick={() => {setNum(num + 1)}}>
         Add
       </button>
-      <button onClick={() => {
+      <button
+        onClick={() => {
           someObject.random = -1;
           console.log(someObject);
         }}
@@ -117,6 +118,30 @@ const feedback = useMemo(()=>{
 
 那么是不是有必要将所有值都用 `useCallback`、`useMemo` 记录起来？对于一些简单的场景，没必要使用这两个 hook，可能反倒引起不必要的性能牺牲，
 例如前面的 callback 例子，我们的组件仅有一个 state，每次更新实际上都会导致 `useCallback` 重新生成 callback，这就没必要使用 hook 了。
-也可以阅读 Kent C. Dodds 的博客 [When to useMemo and useCallback](https://kentcdodds.com/blog/usememo-and-usecallback) 详细了解。
+此外可能还会因为漏写依赖，导致生成的函数 / 对象没有即时更新导致出现bug。
+可以阅读 Kent C. Dodds 的博客 [When to useMemo and useCallback](https://kentcdodds.com/blog/usememo-and-usecallback) 拓展了解这方面内容。
 
-(待更新)
+## 合理地执行副作用
+
+如果你使用过 Class API 的 React，或者 Vue2，对生命周期这个知识应该不陌生，比如 Vue2 的 onMount 和 onCreated 谁先执行的问题。在 Hook API 里，组件的生命周期概念被淡化了，
+因为说到底一个组件函数的执行机会只有挂载和更新。但是开发者依然需要类似的API来在状态改变 / 组件更新的时候做一些其他工作，比如请求API打日志，读写数据到Local Storage。
+基于此，`useEffect` hook 提供的能力，可以解决这个问题。它类似 Vue `watch` 的功能，能够在依赖变更的时候执行一些副作用。比如我们需要在组件内创建一个定时任务，每5秒提醒一下去喝水：
+
+```tsx
+// in function compoent
+useEffect(() => {
+  const timer = setInterval(() => {
+    console.log('It is time to drink water!');
+  }, 5000);
+  
+  return () => {
+    clearInterval(timer);
+  };
+}, []);
+
+```
+这段代码的意图是在组件挂载的时候创建一个定时任务，并且在组件销毁之后清除定时任务，避免产生不必要的问题，尽管可能关闭页面的时候组件才会销毁。我们来探究一下这个 hook 究竟该如何使用。
+这里 `useEffect` 接受两个参数，第一个是执行的回调，第二个是执行的依赖，这里提供了一个空数组，表示仅在组件挂载的时候执行一次，如果你还需要在其他时机执行，那么需要添加相关依赖。
+在执行回调里，我们创建了一个 setInterval 任务，来定期的执行 console.log，这个 API 返回一个代表任务的数字，以支持清除定时任务。可以看到执行的回调返回了一个回调，内容是清除定时任务。
+`useEffect` 的回调参数，允许返回一个任务，用来在下次相关依赖更新之前执行，用来清除上次的副作用。
+
