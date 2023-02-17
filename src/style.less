@@ -5,6 +5,18 @@
   box-sizing: border-box;
 }
 
+:root {
+  scrollbar-width: thin;
+
+  &::-webkit-scrollbar {
+    width: 3px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #c1c1c1;
+  }
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -19,7 +31,6 @@ a {
   padding-left: calc(100vw - 100%);
   font-size: large;
   color: #333;
-  position: relative;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
@@ -47,7 +58,7 @@ a {
 
 .container-glass {
   background-color:rgba(244,244,244,0.1);;
-  width: 70%;
+  width: 70vw;
   padding: 32px calc(min(72px,7%));
   border-radius: 14px;
   min-height: calc(100vh - 200px);
@@ -56,12 +67,20 @@ a {
 }
 
 @media screen and (max-width:720px) {
+
   #root {
     font-size: medium;
   }
+
+  .main {
+    width: 100%;
+    padding: 24px 0;
+    display: block;
+  }
+
   .container-glass {
     width: 90%;
-    margin: 64px auto;
+    margin: 0 auto;
     padding: 8px 16px;
   }
 }

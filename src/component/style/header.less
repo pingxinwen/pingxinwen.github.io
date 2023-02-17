@@ -1,19 +1,17 @@
 .header{
   background-color: #6cf;
-  width: 100vw;
+  width: 100%;
   position: absolute;
   height: 64px;
   margin-left: calc(100% - 100vw);
-  padding: 0 50px;
+  padding-left: calc(100vw - 100%);
   line-height: 32px;
   display: flex;
+  justify-content: center;
   align-items: center;
 
   &-wrapper {
-    position: relative;
     width: 70vw;
-    height: 50%;
-    margin: auto;
     display: flex;
     justify-content: space-around;
   }
@@ -57,9 +55,11 @@
     height: 100vh;
     width: 100%;
     display: block;
+    position: fixed;
     padding: 0;
     background: rgba(48, 48, 48, 0.7);
     transition: background-color 0.2s;
+    z-index: 10;
     &-wrapper {
       position: relative;
       height: 100%;
@@ -97,7 +97,7 @@
       position: absolute;
       color: #333;
       right: -34px;
-      bottom: 12px;
+      bottom: 36px;
       width: 34px;
       height: 34px;
       display: flex;

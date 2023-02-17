@@ -1,6 +1,6 @@
 import React, { VFC } from 'react';
 import Highlight, { defaultProps, Language } from 'prism-react-renderer';
-import vsDark from 'prism-react-renderer/themes/vsDark';
+import vsDark from '../config/theme';
 
 const removeTag = (arg: { className: string }): object => {
   return { ...arg, className: arg.className.replace(/tag/, '').trim() }
