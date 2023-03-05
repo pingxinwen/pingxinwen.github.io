@@ -34,7 +34,7 @@ const blogConfig: BlogSet[] = [];
 
 Object.keys(modules).forEach(path => {
   // debugger;
-  const info = task.find(({ name }) => name && path.search(name) >= 0);
+  const info = task.find(({ name }) => name && path.search(name));
   if (!info) return;
   blogConfig.push(Object.assign({}, info, { component: lazy(modules[path]) }));
 });
