@@ -33,8 +33,7 @@ const modules = import.meta.glob<{ default: MDXComponent }>(
 const blogConfig: BlogSet[] = [];
 
 Object.keys(modules).forEach(path => {
-  // debugger;
-  const info = task.find(({ name }) => name && path.search(name));
+  const info = task.find(({ name }) => path.search(name) >= 0);
   if (!info) return;
   blogConfig.push(Object.assign({}, info, { component: lazy(modules[path]) }));
 });
