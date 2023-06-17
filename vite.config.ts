@@ -20,9 +20,4 @@ export default defineConfig({
     // should be last
     visualizer(),
   ],
-  resolve: {
-    alias: {
-      'react/jsx-runtime': 'react/jsx-runtime.js',
-    },
-  },
 });
