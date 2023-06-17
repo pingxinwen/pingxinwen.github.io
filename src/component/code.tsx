@@ -1,4 +1,4 @@
-import React, { VFC } from 'react';
+import React, { Fragment, VFC } from 'react';
 import Highlight, { defaultProps, Language } from 'prism-react-renderer';
 import vsDark from '../config/theme';
 
@@ -12,9 +12,10 @@ interface ClipButtonProps {
 
 const ClipButton: VFC<ClipButtonProps> = (props) => {
   const { content } = props;
-  const str = typeof content === 'string'? content: content.toString().trim();
+  const str = typeof content === 'string' ? content : content.toString().trim();
   const copy = () => {
     navigator.clipboard.writeText(str)
+      // TODO: alert when success
       .then(() => { console.log('success!') })
   }
 
@@ -34,27 +35,29 @@ const CodeBlock = (props: CodeBlockProps) => {
   const { className, children } = props;
   const language = className?.replace(/language-/, '') as Language;
 
-  if(language === undefined) {
+  if (language === undefined) {
     return (<code className={'blog-content-inlinecode'} >{props.children}</code>)
   }
 
   return (
-    <Highlight {...defaultProps} code={children.toString().trim()} language={language} theme={vsDark}>
-      {
-        ({ className, style, tokens, getLineProps, getTokenProps }) => (
-          <code className={className + ' blog-content-codepre'} style={style}>
-            <ClipButton content={children} />
-            {tokens.map((line, i) => (
-              <div key={i} {...getLineProps({ line, key: i })}>
-                {line.map((token, key) => (
-                  <span key={key} {...removeTag(getTokenProps({ token, key }))} />
-                ))}
-              </div>
-            ))}
-          </code>
-        )
-      }
-    </Highlight>
+    <Fragment>
+      <Highlight {...defaultProps} code={children.toString().trim()} language={language} theme={vsDark}>
+        {
+          ({ className, style, tokens, getLineProps, getTokenProps }) => (
+            <code className={className + ' blog-content-codepre'} style={style}>
+              {tokens.map((line, i) => (
+                <div key={i} {...getLineProps({ line, key: i })}>
+                  {line.map((token, key) => (
+                    <span key={key} {...removeTag(getTokenProps({ token, key }))} />
+                  ))}
+                </div>
+              ))}
+            </code>
+          )
+        }
+      </Highlight>
+      <ClipButton content={children} />
+    </Fragment>
   )
 };
 

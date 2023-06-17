@@ -41,7 +41,9 @@ const MDXComponents: Components = {
   pre:(props) => <pre className={getClassName('pre')} >{props.children}</pre>,
   code: CodeBlock as any,
   inlineCode: (props) => <code className={getClassName('inlinecode')} >{props.children}</code>,
-  ol:(props) => <ol {...props} className={getClassName('ol')}>{props.children}</ol>
+  ol:(props) => <ol {...props} className={getClassName('ol')}>{props.children}</ol>,
+  ul:(props) => <ul {...props} className={getClassName('ul')}>{props.children}</ul>,
+  li:(props) => <li {...props} className={getClassName('li')}>{props.children}</li>,
 }
 
 export default function Blog(props: BlogProps) {
