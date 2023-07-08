@@ -1,6 +1,5 @@
-import React, { useCallback, useState } from 'react';
 import List from '../component/list';
-import { blogFiles, tagColors, BlogSet } from '../config/blogSetting';
+import { blogFiles, tagColors } from '../config/blogSetting';
 
 export default function BlogHome() {
 
@@ -19,5 +18,5 @@ export default function BlogHome() {
       </div>
     </>
 
-  )
+  );
 }

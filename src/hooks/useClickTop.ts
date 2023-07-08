@@ -24,5 +24,5 @@ export function useClickTop() {
   return {
     show,
     handleClick,
-  }
+  };
 };

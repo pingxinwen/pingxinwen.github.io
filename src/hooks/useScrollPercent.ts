@@ -28,4 +28,4 @@ export const useScrollPercent = (): ScrollPercent => {
     scrollPercent,
     scrollTop: _scrollTop,
   };
-}
+};

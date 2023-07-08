@@ -9,7 +9,7 @@ import yaml from '@rollup/plugin-yaml';
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
-    react(),
+    react({}),
     mdx({
       providerImportSource: '@mdx-js/react',
       remarkPlugins: [remarkFrontmatter, remarkMdxFrontmatter],

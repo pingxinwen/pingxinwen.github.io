@@ -1,5 +1,5 @@
 import './style/list.less';
-import React, { Fragment, HTMLAttributes, useState } from 'react';
+import { Fragment, HTMLAttributes, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { BlogSet } from '../config/blogSetting';
 
@@ -13,7 +13,8 @@ export default function List(props: IListProps) {
   const [key, setKey] = useState('');
   const datasource = key ? data.filter(v =>
     v.tags.includes(key)
-  ) : data
+  ) : data;
+
   return (
     <div className="list">
       <div className="list-filter">
@@ -41,7 +42,7 @@ export default function List(props: IListProps) {
                   const color = tagColor.get(tag);
                   return (
                     <Tag color={color} key={tag} onClick={() => setKey(tag)}>{tag}</Tag>
-                  )
+                  );
                 })
               }
             </div>
@@ -65,5 +66,5 @@ function Tag(props: ITagProps) {
     >
       {props.children}
     </p>
-  )
+  );
 }

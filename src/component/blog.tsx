@@ -1,10 +1,10 @@
-import React, { DetailedHTMLProps, FC, ReactElement } from 'react';
+import { ReactNode } from 'react';
 import { MDXProvider } from '@mdx-js/react';
 import { Components } from '@mdx-js/react/lib';
 import CodeBlock from './code';
 
 interface BlogProps {
-  children: React.ReactNode;
+  children: ReactNode;
 };
 
 const getClassName = (name:string)=> `blog-content-${name}`;
@@ -14,7 +14,7 @@ const getClassName = (name:string)=> `blog-content-${name}`;
  * 使用className修改元素样式而不是直接修改
  */
 
-type MDXComponent = (props: any) => JSX.Element;
+type MDXComponent = (props: { children: ReactNode }) => JSX.Element;
 
 const H1:MDXComponent = (props) => <h1 className={getClassName('h1')} >{props.children}</h1>;
 
@@ -44,7 +44,7 @@ const MDXComponents: Components = {
   ol:(props) => <ol {...props} className={getClassName('ol')}>{props.children}</ol>,
   ul:(props) => <ul {...props} className={getClassName('ul')}>{props.children}</ul>,
   li:(props) => <li {...props} className={getClassName('li')}>{props.children}</li>,
-}
+};
 
 export default function Blog(props: BlogProps) {
   return (
@@ -53,5 +53,5 @@ export default function Blog(props: BlogProps) {
         {props.children}
       </MDXProvider>
     </section>
-  )
-}
+  );
+};

@@ -1,5 +1,3 @@
-import React from 'react';
-
 function Loading() {
   return (
     <div className="loading-wrapper">
@@ -7,7 +5,7 @@ function Loading() {
         <div className="loading-progress"/>
       </div>
     </div>
-  )
+  );
 }
 
 export default Loading;

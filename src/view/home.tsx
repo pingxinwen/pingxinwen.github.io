@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { blogFiles } from '../config/blogSetting';
 
@@ -39,5 +39,5 @@ export default function Home() {
         </ul>
       </div>
     </Fragment>
-  )
-}
+  );
+};

@@ -3,8 +3,8 @@ import Highlight, { defaultProps, Language } from 'prism-react-renderer';
 import vsDark from '../config/theme';
 
 const removeTag = (arg: { className: string }): object => {
-  return { ...arg, className: arg.className.replace(/tag/, '').trim() }
-}
+  return { ...arg, className: arg.className.replace(/tag/, '').trim() };
+};
 
 interface ClipButtonProps {
   content: string | React.ReactNode;
@@ -12,19 +12,19 @@ interface ClipButtonProps {
 
 const ClipButton: VFC<ClipButtonProps> = (props) => {
   const { content } = props;
-  const str = typeof content === 'string' ? content : content.toString().trim();
+  const str = typeof content === 'string' ? content : content?.toString().trim();
   const copy = () => {
-    navigator.clipboard.writeText(str)
+    str && navigator.clipboard.writeText(str)
       // TODO: alert when success
-      .then(() => { console.log('success!') })
-  }
+      .then(() => { console.log('success!'); });
+  };
 
   return (
     <div className="copy">
       <button className="copy-btn" onClick={copy}>Copy</button>
     </div>
-  )
-}
+  );
+};
 
 interface CodeBlockProps {
   className?: string;
@@ -36,7 +36,7 @@ const CodeBlock = (props: CodeBlockProps) => {
   const language = className?.replace(/language-/, '') as Language;
 
   if (language === undefined) {
-    return (<code className={'blog-content-inlinecode'} >{props.children}</code>)
+    return (<code className={'blog-content-inlinecode'} >{props.children}</code>);
   }
 
   return (
@@ -58,7 +58,7 @@ const CodeBlock = (props: CodeBlockProps) => {
       </Highlight>
       <ClipButton content={children} />
     </Fragment>
-  )
+  );
 };
 
 export default CodeBlock;

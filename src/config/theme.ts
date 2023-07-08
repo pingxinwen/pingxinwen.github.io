@@ -1,4 +1,4 @@
-import { PrismTheme } from "prism-react-renderer";
+import { PrismTheme } from 'prism-react-renderer';
 import vsDark from 'prism-react-renderer/themes/vsDark';
 
 // strength default theme for use in tsx files
@@ -27,7 +27,7 @@ const myStyles: PrismTheme['styles'] = [
       color: 'rgb(156, 220, 254)'
     }
   },
-]
+];
 
 vsDark.styles.push(...myStyles);
 
