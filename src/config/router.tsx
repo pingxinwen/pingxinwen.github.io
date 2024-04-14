@@ -6,9 +6,9 @@ import BlogHome from '../view/blogHome';
 import BlogContent from '../view/blogContent';
 import Loading from '../component/loading';
 
-const MyRoutes: FC = () => (
+export const MyRoutes: FC = () => (
   <Routes>
-    <Route path="/" element={<Home />} />
+    <Route path="/" element={<BlogHome />} />
     <Route path="/article" element={<BlogHome />} />
     <Route
       path="/article/:name"
@@ -20,4 +20,3 @@ const MyRoutes: FC = () => (
     />
   </Routes>
 );
-export default MyRoutes;

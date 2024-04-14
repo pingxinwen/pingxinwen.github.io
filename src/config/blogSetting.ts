@@ -24,6 +24,10 @@ export interface BlogSet extends Record<string, any> {
    * for English text, make sure to use UpperCase
    */
   tags: Array<string>;
+  /**
+   * 博客发布时间
+   */
+  date: Date;
 }
 
 const modules = import.meta.glob<{ default: MDXComponent }>(

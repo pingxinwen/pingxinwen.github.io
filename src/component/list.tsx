@@ -1,5 +1,6 @@
 import './style/list.less';
 import { Fragment, HTMLAttributes, useState } from 'react';
+import dayjs from 'dayjs';
 import { Link } from 'react-router-dom';
 import { BlogSet } from '../config/blogSetting';
 
@@ -15,6 +16,8 @@ export default function List(props: IListProps) {
     v.tags.includes(key)
   ) : data;
 
+  console.log('datasource:', datasource);
+
   return (
     <div className="list">
       <div className="list-filter">
@@ -27,14 +30,15 @@ export default function List(props: IListProps) {
               </div>
               <button onClick={() => setKey('')}>清除</button>
             </Fragment>
-          ) : null
+          ) : <div className="list-filter-content">全部文章</div>
         }
       </div>
       {
         datasource.map(value => (
           <div className="list-item" key={value.name}>
             <div className="list-item-title">
-              <Link to={`/article/${value.name}`}>{value.title}</Link>
+              <Link className="list-item-link" to={`/article/${value.name}`}>{value.title}</Link>
+              <span className="list-item-date">{dayjs(value.date).format('YYYY-MM-DD')}</span>
             </div>
             <div className="list-item-tag">
               {

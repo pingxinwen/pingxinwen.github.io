@@ -4,7 +4,7 @@ import '@icon-park/react/styles/index.css';
 import { Fragment } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { MyHeader } from './component/header';
-import MyRoutes from './config/router';
+import { MyRoutes } from './config/router';
 import { ClickTop } from './component/clickTop';
 import { PercentBar } from './component/percentBar';
 
