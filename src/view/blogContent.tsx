@@ -8,7 +8,13 @@ type BlogParams = {
 
 export default function BlogContent() {
   const { name } = useParams<BlogParams>();
-  const Component = blogFiles.find(blog => blog.name === name).component;
+  const Component = blogFiles.find(blog => blog.name === name)?.component;
+
+  if (!Component) {
+    //TODO: empty error
+    return null;
+  }
+
   return (
     <Blog>
       <Component />
